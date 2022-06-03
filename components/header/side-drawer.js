@@ -41,6 +41,11 @@ export default function SideDrawer({ closeDrawer }) {
             <a>Wishlist</a>
           </Link>
         </li>
+        <li id="about" className="item">
+          <Link href="/Upload">
+            <a>Upload</a>
+          </Link>
+        </li>
         <li id="contact" className="item">
         
             <a onClick={()=>connect()}>connect</a>

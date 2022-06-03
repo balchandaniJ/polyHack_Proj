@@ -3,21 +3,15 @@ import { CART, PRODUCTS_BY_IDS_PRICE } from '../apollo/client/queries';
 import { useState } from 'react';
 import { ethers } from "ethers";
 import { useEffect } from 'react';
+import product_abi from '../artifacts/contracts/Product.sol/Product.json';
+ 
 export default function FinishOrderCart(cost) {
   const [finalPrice, setFinalPrice] = useState(0);
   const cart = useQuery(CART);
+  const contract_address = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
+  const abi= product_abi.abi;
   useEffect(() =>{setFinalPrice(cost.cost)},[])
- const setPrice = () =>{setFinalPrice(cost)};
 
-  const { data, loading, error } = useQuery(PRODUCTS_BY_IDS_PRICE, {
-    variables: {
-      id: cart.data.cart.products,
-    },
-  });
-
-  if (loading) return <></>;
-
-  if (error) return <></>;
   const [signer,setSigner]=useState();
   async function connect(){
    try{
@@ -32,13 +26,23 @@ export default function FinishOrderCart(cost) {
   } 
   catch(e){console.log(e)}
 } 
+async function execute(){
+  if(typeof window.ethereum !== 'undefined'){
+      let connectedProvider = new ethers.providers.Web3Provider(window.ethereum);
+      const contract= new ethers.Contract(contract_address,abi,connectedProvider.getSigner());
+      await contract.TransferInitialization(parseInt(finalPrice));
+      await console.log(contract.product_name);
+  }else{
+       connect();
+  }
+}
   return (
     <div className="finishOrder">
       <div className="info">
         <p className="total">Total({cart?.data.cart.cartCount} Item):</p>
         <p className="price">$ {finalPrice}</p>
       </div>
-      <button onClick={()=>connect()}>Finish Order</button>
+      <button onClick={()=>execute()}>Finish Order</button>
       <style jsx>{`
         .finishOrder {
           display: flex;

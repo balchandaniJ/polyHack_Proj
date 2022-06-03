@@ -51,6 +51,11 @@ async function connect(){
               <p>Wishlist</p>
             </a>
           </Link>
+          <Link href="/Upload">
+            <a className="nav-buttons-wishlist">
+              <p>Upload</p>
+            </a>
+          </Link>
           <a className='nav-buttons-wishlist' onClick={()=>connect()}>
             <p>connect</p>
           </a>
@@ -71,51 +76,6 @@ async function connect(){
               </Link>
             </>
           )}
-        </div>
-      </div>
-      <div className="header header-bottom">
-        <div className="all-categories-box">
-          <FaBars color="#d8d8d8" />
-          <select name="categories" id="categories">
-            <option value="All Categories" selected>
-              All Categories
-            </option>
-            <option value="#">Desktop</option>
-            <option value="#">Smartphone</option>
-            <option value="#">Watches</option>
-            <option value="#">Games</option>
-            <option value="#">Laptop</option>
-            <option value="#">Keyboards</option>
-            <option value="#">TV & Video</option>
-            <option value="#">Accessories</option>
-          </select>
-        </div>
-
-        <nav className="main-nav">
-          <Link href="#">
-            <a>Super Deals</a>
-          </Link>
-          <Link href="#">
-            <a>Featured Brands</a>
-          </Link>
-          <Link href="#">
-            <a>Collections</a>
-          </Link>
-          <Link href="#">
-            <a>Bestselling</a>
-          </Link>
-        </nav>
-
-        <div className="settings">
-          <div className="menu-dropdown">
-            <p>Help</p>
-          </div>
-          <div className="menu-dropdown">
-            <p>USD</p>
-          </div>
-          <div className="menu-dropdown">
-            <p>Language</p>
-          </div>
         </div>
       </div>
       <style jsx>{`
